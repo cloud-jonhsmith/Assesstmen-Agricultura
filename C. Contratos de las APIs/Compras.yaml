@@ -1,0 +1,342 @@
+openapi: 3.0.0
+info:
+  title: API de Compras
+  version: 1.0.0
+paths:
+  /obtenerCompra:
+    get:
+      summary: Obtener todas las compras
+      responses:
+        '200':
+          description: Lista de compras obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id_oferta:
+                      type: string
+                    fechaCompra:
+                      type: string
+                      format: date-time
+                    precioTotal:
+                      type: number
+                    cantidadComprada:
+                      type: integer
+                    id_comprador:
+                      type: string
+                    estadoCompra:
+                      type: string
+                    id_compra:
+                      type: string
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '500':
+          description: Error en el servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error al obtener las compras
+
+  /obtenerCompra/{id_compra}:
+    get:
+      summary: Obtener una compra por ID
+      parameters:
+        - name: id_compra
+          in: path
+          required: true
+          description: ID de la compra a obtener
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Compra obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id_oferta:
+                    type: string
+                  fechaCompra:
+                    type: string
+                    format: date-time
+                  precioTotal:
+                    type: number
+                  cantidadComprada:
+                    type: integer
+                  id_comprador:
+                    type: string
+                  estadoCompra:
+                    type: string
+                  id_compra:
+                    type: string
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '404':
+          description: Compra no encontrada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Compra no encontrada
+        '500':
+          description: Error en el servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error al obtener las compras
+
+  /crearCompra:
+    post:
+      summary: Crear una nueva compra
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_oferta:
+                  type: string
+                cantidadComprada:
+                  type: integer
+                id_comprador:
+                  type: string
+                precioTotal:
+                  type: number
+      responses:
+        '201':
+          description: Compra creada exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  compra:
+                    type: object
+                    properties:
+                      id_compra:
+                        type: string
+                      id_oferta:
+                        type: string
+                      cantidadComprada:
+                        type: integer
+                      fechaCompra:
+                        type: string
+                      estadoCompra:
+                        type: string
+                      id_comprador:
+                        type: string
+                      precioTotal:
+                        type: number
+        '400':
+          description: Faltan parámetros necesarios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Faltan parámetros necesarios
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '404':
+          description: Oferta no encontrada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'No se encontró la oferta con id_oferta: 123'
+        '500':
+          description: Error en el servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error al crear la compra.
+
+  /actualizarCompra:
+    put:
+      summary: Actualizar una compra existente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_compra:
+                  type: string
+                cantidadComprada:
+                  type: integer
+                estadoCompra:
+                  type: string
+                precioTotal:
+                  type: number
+      responses:
+        '200':
+          description: Compra actualizada exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  compra:
+                    type: object
+                    properties:
+                      estadoCompra:
+                        type: string
+                      precioTotal:
+                        type: number
+                      cantidadComprada:
+                        type: integer
+        '400':
+          description: "Se requiere el id_compra para actualizar"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Se requiere el id_compra para actualizar"
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '404':
+          description: Compra no encontrada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "No se encontró la compra con id_compra: 123"
+        '500':
+          description: Error en el servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error al actualizar la compra
+
+  /eliminarCompra:
+    delete:
+      summary: Eliminar una compra
+      parameters:
+        - name: id_compra
+          in: query
+          required: true
+          description: ID de la compra a eliminar
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Compra eliminada exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: "Se requiere el id_compra para eliminar"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Se requiere el id_compra para eliminar"
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '404':
+          description: Compra no encontrada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "No se encontró la compra con id_compra: 123"
+        '500':
+          description: Error en el servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error al eliminar la compra

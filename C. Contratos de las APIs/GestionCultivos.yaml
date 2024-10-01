@@ -1,0 +1,274 @@
+openapi: 3.0.0
+info:
+  title: API de Gestión Cultivos
+  version: 1.0.0
+paths:
+  /obtenerCultivo:
+    get:
+      summary: Obtener información del cultivo
+      parameters:
+        - name: id_producto
+          in: query
+          required: false
+          description: ID del producto del cultivo a obtener. Si no se proporciona, se devolverán todos los cultivos.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de cultivos o un cultivo específico si se proporciona un ID
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: ID del cultivo
+                    nombre:
+                      type: string
+                      description: Nombre del cultivo
+                    tipo:
+                      type: string
+                      description: Tipo de cultivo
+                    ubicacion:
+                      type: string
+                      description: Ubicación del cultivo
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '404':
+          description: Cultivo no encontrado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Cultivo no encontrado.
+        '500':
+          description: Error en el servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error al obtener los cultivos.
+
+  /registroCultivo:
+    post:
+      summary: Registrar un nuevo cultivo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tipo:
+                  type: string
+                variedad:
+                  type: string
+                ubicacion:
+                  type: string
+                tamano:
+                  type: string
+                fechaCultivo:
+                  type: string
+                  format: date
+      responses:
+        '201':
+          description: Producto registrado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Producto registrado exitosamente.
+                  producto:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      tipo:
+                        type: string
+                      variedad:
+                        type: string
+                      ubicacion:
+                        type: string
+                      tamano:
+                        type: string
+                      fechaCultivo:
+                        type: string
+                        format: date
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '500':
+          description: Error en el servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error al registrar el producto.
+
+  /actualizarCultivo:
+    put:
+      summary: Actualizar un cultivo existente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_producto:
+                  type: string
+                tipo:
+                  type: string
+                variedad:
+                  type: string
+                ubicacion:
+                  type: string
+                tamano:
+                  type: string
+                fechaCultivo:
+                  type: string
+                  format: date
+                fechaCosecha:
+                  type: string
+                  format: date
+      responses:
+        '200':
+          description: Producto actualizado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Producto actualizado exitosamente.
+                  productoActualizado:
+                    type: object
+                    properties:
+                      fechaCultivo:
+                        type: string
+                        format: date
+                      tamano:
+                        type: string
+                      tipo:
+                        type: string
+                      fechaCosecha:
+                        type: string
+                        format: date
+                      ubicacion:
+                        type: string
+                      id:
+                        type: string
+                      variedad:
+                        type: string
+        '400':
+          description: El producto no existe en la tabla.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: El producto no existe en la tabla.
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '500':
+          description: Error en el servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error al actualizar el producto.
+
+  /eliminarCultivo:
+    delete:
+      summary: Eliminar un cultivo por ID
+      parameters:
+        - name: id_producto
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Producto eliminado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Producto eliminado exitosamente.
+        '400':
+          description: El campo 'id_producto' es obligatorio o el producto no existe en la tabla.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: El campo 'id_producto' es obligatorio.
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '500':
+          description: Error en el servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error al eliminar el producto.

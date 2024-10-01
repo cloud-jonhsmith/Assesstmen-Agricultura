@@ -1,0 +1,289 @@
+openapi: 3.0.0
+info:
+  title: API de Ofertas
+  version: 1.0.0
+  description: API para manejar las ofertas de cultivos
+
+paths:
+  /obtenerOferta:
+    get:
+      summary: Obtener ofertas según tipo de cultivo
+      parameters:
+        - name: tipo
+          in: query
+          required: true
+          description: Tipo del cultivo que se han ofertado. Si no se proporciona, se devolverán todas las ofertas.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Respuesta exitosa con ofertas encontradas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ofertas:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id_vendedor:
+                          type: string
+                        id_cultivo:
+                          type: string
+                        id_oferta:
+                          type: string
+                        fechaPublicacion:
+                          type: string
+                          format: date-time
+                        cantidad:
+                          type: integer
+                        estado:
+                          type: string
+                        precio:
+                          type: number
+                          format: float
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '404':
+          description: No se encontraron ofertas disponibles.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "No se encontraron ofertas disponibles."
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Error al obtener las ofertas."
+
+  /crearOferta:
+    post:
+      summary: Crear una nueva oferta
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_cultivo:
+                  type: string
+                precio:
+                  type: number
+                  format: float
+                cantidad:
+                  type: integer
+                id_vendedor:
+                  type: string
+      responses:
+        '201':
+          description: Oferta creada exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Oferta creada exitosamente"
+                  oferta:
+                    type: object
+                    properties:
+                      id_oferta:
+                        type: string
+                      id_cultivo:
+                        type: string
+                      precio:
+                        type: number
+                        format: float
+                      cantidad:
+                        type: integer
+                      fechaPublicacion:
+                        type: string
+                        format: date-time
+                      estado:
+                        type: string
+                      id_vendedor:
+                        type: string
+        '400':
+          description: Faltan parámetros necesarios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Faltan parámetros necesarios"
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '404':
+          description: No se encontró el cultivo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "No se encontró el cultivo con id_cultivo: 1231231232131"
+        '500':
+          description: Error al crear la oferta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error al crear la oferta.
+
+  /actualizarOferta:
+    put:
+      summary: Actualizar una oferta existente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_oferta:
+                  type: string
+                precio:
+                  type: number
+                  format: float
+                cantidad:
+                  type: integer
+                estado:
+                  type: string
+      responses:
+        '200':
+          description: Oferta actualizada exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Oferta actualizada exitosamente."
+                  updatedAttributes:
+                    type: object
+                    properties:
+                      cantidad:
+                        type: integer
+                      estado:
+                        type: string
+                      precio:
+                        type: number
+                        format: float
+        '400':
+          description: El producto no existe
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "El producto no existe en la tabla."
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '500':
+          description: Error al actualizar la oferta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Error al actualizar la oferta."
+
+  /eliminarOferta:
+    delete:
+      summary: Eliminar una oferta
+      parameters:
+        - name: id_oferta
+          in: query
+          required: true
+          description: ID de la oferta a eliminar
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Oferta eliminada exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Oferta eliminada exitosamente."
+        '400':
+          description: El campo 'id_oferta' es obligatorio
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "El campo 'id_oferta' es obligatorio."
+        '403':
+          description: Error de Autenticación
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Forbidden
+        '500':
+          description: Error al eliminar la oferta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Error al eliminar la oferta.

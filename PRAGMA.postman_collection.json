@@ -1,0 +1,614 @@
+{
+	"info": {
+		"_postman_id": "2fe6393e-6c6f-4c15-897b-8aa62b578be3",
+		"name": "PRAGMA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16742888",
+		"_collection_link": "https://cloudy-equinox-49121.postman.co/workspace/Practicando_BanColombia~896d5816-69ed-48bd-b806-cbe26563cefc/collection/16742888-2fe6393e-6c6f-4c15-897b-8aa62b578be3?action=share&source=collection_link&creator=16742888"
+	},
+	"item": [
+		{
+			"name": "Assesstment",
+			"item": [
+				{
+					"name": "30-09-2024 (Agricultura)",
+					"item": [
+						{
+							"name": "GestionCultivos",
+							"item": [
+								{
+									"name": "obtenerCultivo",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/obtenerCultivo",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"obtenerCultivo"
+											],
+											"query": [
+												{
+													"key": "id_producto",
+													"value": "12212",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "registroCultivo",
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"tipo\": \"Papa\",\r\n  \"variedad\": \"Peruana\",\r\n  \"ubicacion\": \"Lima-Campo2\",\r\n  \"tamano\": \"2 Hectáreas\",\r\n  \"fechaCultivo\": \"2024-09-30\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/registroCultivo",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"registroCultivo"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "actualizarCultivo",
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"id_producto\": \"3\",\r\n  \"tipo\": \"Papa\",\r\n  \"variedad\": \"Peruana\",\r\n  \"ubicacion\": \"Ica-Campo2\",\r\n  \"tamano\": \"5 Hectáreas\",\r\n  \"fechaCultivo\": \"2024-01-15\",\r\n  \"fechaCosecha\": \"2024-02-15\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/actualizarCultivo",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"actualizarCultivo"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "eliminarCultivo",
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/eliminarCultivo?id_producto=222222_peruana_1727782023376",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"eliminarCultivo"
+											],
+											"query": [
+												{
+													"key": "id_producto",
+													"value": "222222_peruana_1727782023376"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Ofertas",
+							"item": [
+								{
+									"name": "obtenerOferta",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/obtenerOferta",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"obtenerOferta"
+											],
+											"query": [
+												{
+													"key": "tipo",
+													"value": "Papa",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "crearOferta",
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"id_cultivo\": \"1231231232131\",\r\n  \"precio\": 200.5,\r\n  \"cantidad\": 500,\r\n  \"id_vendedor\": \"70432322\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/crearOferta",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"crearOferta"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "actualizarOferta",
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id_oferta\": \"8728c4de-a720-414d-9ab7-0f031dd46d5c\",\r\n    \"precio\": 160.00,\r\n    \"cantidad\": 1500,\r\n    \"estado\": \"vendida\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/actualizarOferta",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"actualizarOferta"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "eliminarOferta",
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/eliminarOferta?id_oferta=111",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"eliminarOferta"
+											],
+											"query": [
+												{
+													"key": "id_oferta",
+													"value": "111"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Compras",
+							"item": [
+								{
+									"name": "obtenerCompra",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/obtenerCompra",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"obtenerCompra"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "obtenerCompra/{id_compra}",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/obtenerCompra/ddd",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"obtenerCompra",
+												"ddd"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "crearCompra",
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id_oferta\": \"dxcv\",\r\n    \"cantidadComprada\": 100,\r\n    \"id_comprador\": \"comprador999999\",\r\n    \"precioTotal\": 1000\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/crearCompra",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"crearCompra"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "actualizarCompra",
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id_compra\": \"44\",\r\n    \"cantidadComprada\": 100,\r\n    \"estadoCompra\": \"En camino\",\r\n    \"precioTotal\": 150.00\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/actualizarCompra",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"actualizarCompra"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "eliminarCompra",
+									"request": {
+										"auth": {
+											"type": "awsv4",
+											"awsv4": [
+												{
+													"key": "secretKey",
+													"value": "{{SecretKey}}",
+													"type": "string"
+												},
+												{
+													"key": "accessKey",
+													"value": "{{AccessKey}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{urlBase}}/eliminarCompra?id_compra=tggrtgrddf",
+											"host": [
+												"{{urlBase}}"
+											],
+											"path": [
+												"eliminarCompra"
+											],
+											"query": [
+												{
+													"key": "id_compra",
+													"value": "tggrtgrddf"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
